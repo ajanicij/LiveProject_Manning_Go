@@ -4,17 +4,21 @@ import (
 	"testing"
 )
 
-func Test_makeLinkedList(t *testing.T) {
+func Test_makeDoublyLinkedList(t *testing.T) {
 	values := []string{"one", "two", "three"}
-	list := makeLinkedList()
+	list := makeDoublyLinkedList()
 	list.addRange(values)
 	if list.length() != 3 {
 		t.Errorf("wrong list length: %d", list.length())
 	}
+	first := list.topSentinel.next
+	if first.data != "one" {
+		t.Errorf("wrong first element: %s", first.data)
+	}
 }
 
 func Test_contains(t *testing.T) {
-	list := makeLinkedList()
+	list := makeDoublyLinkedList()
 	list.addRange([]string{"one", "two"})
 	if list.contains("thousand") {
 		t.Errorf("contains returns true but should be false")
@@ -25,7 +29,7 @@ func Test_contains(t *testing.T) {
 }
 
 func Test_find(t *testing.T) {
-	list := makeLinkedList()
+	list := makeDoublyLinkedList()
 	list.addRange([]string{"one", "two", "three"})
 	cell := list.find("two")
 	if cell == nil {
@@ -42,14 +46,8 @@ func Test_find(t *testing.T) {
 	}
 }
 
-func Test_push(t *testing.T) {
-	list := makeLinkedList()
-	list.addRange([]string{"one", "two", "three"})
-	list.push("ZERO")
-}
-
 func Test_isEmpty(t *testing.T) {
-	list := makeLinkedList()
+	list := makeDoublyLinkedList()
 	if !list.isEmpty() {
 		t.Errorf("isEmpty should return true")
 	}
@@ -60,7 +58,7 @@ func Test_isEmpty(t *testing.T) {
 }
 
 func Test_pop(t *testing.T) {
-	list := makeLinkedList()
+	list := makeDoublyLinkedList()
 	list.addRange([]string{"one", "two", "three"})
 	list.push("ZERO")
 	value := list.pop()
@@ -74,31 +72,17 @@ func Test_hasLoop(t *testing.T) {
 	cell2 := &Cell{data: "two"}
 	cell3 := &Cell{data: "three"}
 	cell4 := &Cell{data: "four"}
-	list := makeLinkedList()
-	list.sentinel.addAfter(cell1)
+	list := makeDoublyLinkedList()
+	list.topSentinel.addAfter(cell1)
 	cell1.addAfter(cell2)
 	cell2.addAfter(cell3)
 	cell3.addAfter(cell4)
-	if list.sentinel.hasLoop() {
+	if list.hasLoop() {
 		t.Errorf("hasLoop must return false")
 	}
 	cell4.next = cell1
-	if !list.sentinel.hasLoop() {
+	if !list.hasLoop() {
 		t.Errorf("hasLoop must return true")
-	}
-}
-
-func Test_toStringMax(t *testing.T) {
-	list := makeLinkedList()
-	list.addRange([]string{"one", "two", "three"})
-	var res string
-	res = list.toStringMax(" ", 3)
-	if res != "one two three" {
-		t.Errorf("toStringMax must return `one two three': it returned `%s'", res)
-	}
-	res = list.toStringMax(" ", 2)
-	if res != "one two" {
-		t.Errorf("toStringMax must return `one two': it returned `%s'", res)
 	}
 }
 

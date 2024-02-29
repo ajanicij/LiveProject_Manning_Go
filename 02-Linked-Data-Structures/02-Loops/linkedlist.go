@@ -73,24 +73,16 @@ func (list *LinkedList) isEmpty() bool {
 }
 
 func (list *LinkedList) contains(value string) bool {
-	cell := list.sentinel.next
-	for cell != nil {
-		if cell.data == value {
-			return true
-		}
-		cell = cell.next
-	}
-	return false
+	cell := list.find(value)
+	return cell != nil
 }
 
 func (list *LinkedList) find(value string) *Cell {
-	previous := list.sentinel
 	cell := list.sentinel.next
 	for cell != nil {
 		if cell.data == value {
-			return previous
+			return cell
 		}
-		previous = cell
 		cell = cell.next
 	}
 	return nil
