@@ -86,3 +86,45 @@ func Test_hasLoop(t *testing.T) {
 	}
 }
 
+// queue
+
+func Test_enqueue(t *testing.T) {
+	list := makeDoublyLinkedList()
+	list.addRange([]string{"one", "two", "three"})
+	list.enqueue("ZERO")
+	value := list.pop()
+	if value != "ZERO" {
+		t.Errorf("pop returned wrong value: %s", value)
+	}
+}
+
+func Test_dequeue(t *testing.T) {
+	list := makeDoublyLinkedList()
+	list.addRange([]string{"one", "two", "three"})
+	list.enqueue("ZERO")
+	value := list.dequeue()
+	if value != "three" {
+		t.Errorf("dequeue returned wrong value: %s", value)
+	}
+	value = list.dequeue()
+	if value != "two" {
+		t.Errorf("dequeue returned wrong value: %s", value)
+	}
+}
+
+// deque
+
+func Test_pushBottom(t *testing.T) {
+	list := makeDoublyLinkedList()
+	list.addRange([]string{"one"})
+	list.pushBottom("ZERO")
+	value := list.pop()
+	if value != "one" {
+		t.Errorf("pop returned wrong value: %s", value)
+	}
+	value = list.pop()
+	if value != "ZERO" {
+		t.Errorf("pop returned wrong value: %s", value)
+	}
+}
+

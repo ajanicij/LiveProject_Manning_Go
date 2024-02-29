@@ -154,3 +154,48 @@ func (list *DoublyLinkedList) toStringMax(separator string, max int) string {
 	return builder.String()
 }
 
+// queue
+
+// Add an item to the top of the queue.
+func (queue *DoublyLinkedList) enqueue(value string) {
+	queue.push(value)
+}
+
+// Remove an item from the bottom of the queue.
+func (queue *DoublyLinkedList) dequeue() string {
+	if queue.isEmpty() {
+		panic("trying to dequeue from empty queue")
+	}
+	cell := queue.bottomSentinel.prev
+	cell.delete()
+	return cell.data
+}
+
+// deque
+
+// Add an item at the bottom of the deque.
+func (deque *DoublyLinkedList) pushBottom(value string) {
+	cell := &Cell{data: value}
+	deque.bottomSentinel.addBefore(cell)
+}
+
+// Add an item at the top of the deque.
+func (deque *DoublyLinkedList) pushTop(value string) {
+	deque.push(value)
+}
+
+// Remove an item from the top of the deque.
+func (deque *DoublyLinkedList) popTop() string {
+	return deque.pop()
+}
+
+// Add an item at the top of the deque.
+func (deque *DoublyLinkedList) popBottom() string {
+	if deque.isEmpty() {
+		panic("trying to pop from empty stack")
+	}
+	cell := deque.bottomSentinel.prev
+	cell.delete()
+	return cell.data
+}
+
