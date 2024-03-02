@@ -51,5 +51,11 @@ func main() {
     fmt.Println("Inorder:      ", aNode.inorder())
     fmt.Println("Postorder:    ", aNode.postorder())
     fmt.Println("Breadth first:", aNode.breadthFirst())
+    
+    // Functional programming.
+    fmt.Println("Functional Traversal")
+    aNode.traverse(func (node *Node) {
+    	fmt.Printf("func: (%p) node=%v\n", node, node)
+    })
 }
 

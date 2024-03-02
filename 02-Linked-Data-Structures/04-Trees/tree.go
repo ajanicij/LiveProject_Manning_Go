@@ -22,6 +22,28 @@ func (node *Node) preorder() string {
 	return result
 }
 
+func (node *Node) preorderFunc(fn func(node *Node)) string {
+	fn(node)
+	result := node.data
+	if node.left != nil {
+		result += " " + node.left.preorderFunc(fn)
+	}
+	if node.right != nil {
+		result += " " + node.right.preorderFunc(fn)
+	}
+	return result
+}
+
+func (node *Node) traverse(fn func(node *Node)) {
+	fn(node)
+	if node.left != nil {
+		node.left.traverse(fn)
+	}
+	if node.right != nil {
+		node.right.traverse(fn)
+	}
+}
+
 func (node *Node) inorder() string {
 	result := ""
 	if node.left != nil {
