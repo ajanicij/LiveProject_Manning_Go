@@ -27,16 +27,16 @@ var numCalls int64
 var numVisitedMax int
 
 func initializeOffsets() {
-	moveOffsets = []Offset{
-		{1, -2},
-		{1, 2},
-		{-1, 2},
-		{-1, -2},
-		{-2, 1},
-		{-2, -1},
-		{2, 1},
-		{2, -1},
-	}
+    moveOffsets = []Offset {
+        Offset {-2, -1},
+        Offset {-1, -2},
+        Offset {+2, -1},
+        Offset {+1, -2},
+        Offset {-2, +1},
+        Offset {-1, +2},
+        Offset {+2, +1},
+        Offset {+1, +2},
+    }
 }
 
 func makeBoard(numRows, numCols int) [][]int {
