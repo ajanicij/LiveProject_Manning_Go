@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 // Build a sieve of Eratosthenes.
 func sieveOfEratosthenes(max int) []bool {
@@ -37,7 +40,12 @@ func printSieve(sieve []bool) {
 }
 
 func main() {
-	max := 10000
+	var max int
+	fmt.Print("max: ")
+	fmt.Scanf("%d", &max)
+	if max < 2 {
+		os.Exit(0)
+	}
 	sieve := sieveOfEratosthenes(max)
 	fmt.Printf("Primes up to %d:\n", max)
 	printSieve(sieve)
