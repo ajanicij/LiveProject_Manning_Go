@@ -137,10 +137,10 @@ func doExhaustiveSearch(items []Item, allowedWeight, nextIndex int) (
 	resultItems2, totalValue2, functionCalls2 :=  doExhaustiveSearch(items, allowedWeight,
 		nextIndex + 1)
 	
-	if totalValue1 > totalValue2 {
-		return resultItems1, totalValue1, functionCalls1 + 1
+	if totalValue1 >= totalValue2 {
+		return resultItems1, totalValue1, functionCalls1 + functionCalls2 + 1
 	} else {
-		return resultItems2, totalValue2, functionCalls2 + 1
+		return resultItems2, totalValue2, functionCalls1 + functionCalls2 + 1
 	}
 }
 
@@ -152,6 +152,7 @@ func main() {
 	// Display basic parameters.
 	fmt.Println("*** Parameters ***")
 	fmt.Printf("# items: %d\n", numItems)
+	// fmt.Printf("  all items: %v\n", items)
 	fmt.Printf("Total value: %d\n", sumValues(items, true))
 	fmt.Printf("Total weight: %d\n", sumWeights(items, true))
 	fmt.Printf("Allowed weight: %d\n", allowedWeight)
