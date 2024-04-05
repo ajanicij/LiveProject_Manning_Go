@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-const numItems = 20
+const numItems = 40
 
 const minValue = 1
 const maxValue = 10
@@ -230,7 +230,6 @@ func doRodsTechnique(items []Item, allowedWeight,
 		if currentValue + remainingValue - items[nextIndex].value <= bestValue {
 			test2Solution = nil
 			test2Value = 0
-			test2Calls = 1
 		}
 		unblockItems(items[nextIndex], items)
 	}
