@@ -324,7 +324,7 @@ func main() {
 		runAlgorithm(rodsTechnique, items, allowedWeight)
 	}
 
-	if numItems > 100 { // Only run search if numItems <= 350.
+	if numItems > 350 { // Only run search if numItems <= 350.
 		fmt.Println("Too many items Rod's technique (Sorted speedup)")
 	} else {
 		fmt.Println("*** Rod's Technique (Sorted speedup) ***")
